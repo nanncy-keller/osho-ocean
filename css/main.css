@@ -1,0 +1,531 @@
+/* ============================================================
+   RESET
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   BASE — Desktop padrão  (acima de 1024px)
+   Todos os valores aqui são a referência principal.
+   ============================================================ */
+
+body {
+    font-family: 'Georgia', serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #001f3f 0%, #0a4f6e 20%, #1a7fa0 40%, #2a9fd8 60%, #1a7fa0 80%, #001f3f 100%);
+    background-size: 400% 400%;
+    animation: oceanFlow 20s ease infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    z-index: 10;
+}
+
+h1 {
+    font-size: 3.5rem;
+    background: linear-gradient(90deg, #4dd0e1, #80deea, #b2ebf2, #80deea, #4dd0e1);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+    animation: flowWave 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 20px rgba(77, 208, 225, 0.6));
+    font-weight: bold;
+    position: relative;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #b2ebf2;
+    font-style: italic;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 10px rgba(77, 208, 225, 0.4);
+}
+
+/* Card */
+.card-container {
+    perspective: 1000px;
+    z-index: 10;
+}
+
+.card {
+    background: rgba(10, 79, 110, 0.15);
+    backdrop-filter: blur(7px);
+    border: 3px solid rgba(77, 208, 225, 0.25);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    padding: 50px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow:
+        0 20px 60px rgba(0, 50, 80, 0.4),
+        0 0 40px rgba(77, 208, 225, 0.2),
+        inset 0 0 30px rgba(77, 208, 225, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-radius 0.5s ease;
+    animation: morphBorder 8s ease-in-out infinite;
+    z-index: 10;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 25px 70px rgba(0, 50, 80, 0.5),
+        0 0 50px rgba(77, 208, 225, 0.3);
+}
+
+/* Botão de copiar */
+.copy-button {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(77, 208, 225, 0.15);
+    border: 2px solid rgba(77, 208, 225, 0.4);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #4dd0e1;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3);
+    z-index: 100;
+}
+
+.copy-button:hover {
+    background: rgba(77, 208, 225, 0.25);
+    border-color: rgba(77, 208, 225, 0.7);
+    transform: translateX(-50%) scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 25px rgba(77, 208, 225, 0.5);
+}
+
+.copy-button:active {
+    transform: translateX(-50%) scale(0.95);
+}
+
+.copy-button svg {
+    width: 22px;
+    height: 22px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Tooltip "Copied!" */
+.copy-tooltip {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background: rgba(77, 208, 225, 0.95);
+    color: #001f3f;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(77, 208, 225, 0.4);
+}
+
+.copy-button.copied .copy-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.copy-button.copied {
+    animation: copyPulse 0.6s ease;
+}
+
+@keyframes copyPulse {
+    0%, 100% {
+        transform: translateX(-50%) scale(1) rotate(0deg);
+        border-color: rgba(77, 208, 225, 0.4);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.2) rotate(10deg);
+        border-color: rgba(77, 208, 225, 1);
+        box-shadow: 0 0 30px rgba(77, 208, 225, 0.8);
+    }
+}
+
+/* Texto da citação e autor */
+.quote-text {
+    font-size: 1.4rem;
+    color: #ffffff;
+    line-height: 1.8;
+    text-align: center;
+    margin: 30px 0;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.author {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #4dd0e1;
+    font-style: italic;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Botão concha */
+.button-container {
+    text-align: center;
+    margin-top: 35px;
+    position: relative;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-text {
+    font-size: 1.2rem;
+    color: #b2ebf2;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-shadow:
+        0 2px 10px rgba(77, 208, 225, 0.5),
+        0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+
+/* ============================================================
+   MOBILE — até 600px
+   Tela pequena: ocultar âncora e linha de pesca,
+   reduzir tudo proporcionalmente.
+   ============================================================ */
+@media (max-width: 600px) {
+
+    #fishing-line-svg,
+    #anchor-svg {
+        display: none;
+    }
+
+    .ship-hull {
+        width: 250px;
+        height: 130px;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0.25;
+        z-index: 5;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-top: 50px;
+        letter-spacing: 2px;
+    }
+
+    .subtitle {
+        font-size: 0.85rem;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    .card {
+        padding: 20px 18px;
+        max-width: 88%;
+        min-height: 130px;
+        margin: 0 auto;
+    }
+
+    .quote-text {
+        font-size: 0.92rem;
+        line-height: 1.5;
+        min-height: 100px;
+        margin: 20px 0;
+    }
+
+    .author {
+        font-size: 0.78rem;
+        margin-top: 8px;
+    }
+
+    .shell-button img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .button-text {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+
+    .button-container {
+        margin-top: 12px;
+        gap: 4px;
+    }
+
+    .copy-button {
+        width: 38px;
+        height: 38px;
+        top: 10px;
+    }
+
+    .copy-button svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .copy-tooltip {
+        font-size: 0.72rem;
+        padding: 5px 10px;
+        top: 50px;
+    }
+}
+
+
+/* ============================================================
+   TABLET — 601px a 1024px
+   Âncora e linha de pesca voltam, em escala reduzida.
+   ============================================================ */
+@media (min-width: 601px) and (max-width: 1024px) {
+
+    .ship-hull {
+        width: 360px;
+        height: 145px;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0.28;
+        z-index: 5;
+    }
+
+    #anchor-svg {
+        display: block;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.72);
+        transform-origin: top center;
+    }
+
+    #fishing-line-svg {
+        display: block;
+        top: 0;
+        left: 1%;
+        transform: scale(0.65);
+        transform-origin: top left;
+    }
+
+    h1 {
+        font-size: 2.6rem;
+        margin-top: 80px;
+        letter-spacing: 3px;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .card {
+        padding: 35px;
+        max-width: 620px;
+    }
+
+    .quote-text {
+        font-size: 1.2rem;
+        min-height: 130px;
+    }
+
+    .author {
+        font-size: 1rem;
+    }
+
+    .shell-button img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .button-text {
+        font-size: 1.05rem;
+    }
+
+    .button-container {
+        margin-top: 28px;
+    }
+}
+
+
+/* ============================================================
+   DESKTOP GRANDE — 1025px a 1599px
+   Os valores base cobrem bem este intervalo.
+   
+   ============================================================ */
+
+
+
+/* ============================================================
+   FULL HD — 1600px a 1999px
+   Aumentos suaves para preencher a tela sem exagero.
+   ============================================================ */
+@media (min-width: 1600px) and (max-width: 1999px) {
+
+    .ship-hull {
+        width: 560px;
+        height: 225px;
+        top: -55px;
+    }
+
+    #anchor-svg {
+        top: -55px;
+    }
+
+    h1 {
+        font-size: 4.5rem;
+        letter-spacing: 5px;
+    }
+
+    .subtitle {
+        font-size: 1.4rem;
+    }
+
+    .card {
+        max-width: 850px;
+        padding: 65px;
+    }
+
+    .quote-text {
+        font-size: 1.65rem;
+        min-height: 170px;
+    }
+
+    .author {
+        font-size: 1.25rem;
+    }
+
+    .shell-button img {
+        width: 145px;
+        height: 145px;
+    }
+
+    .button-text {
+        font-size: 1.35rem;
+    }
+
+    .copy-button {
+        width: 58px;
+        height: 58px;
+    }
+
+    .copy-button svg {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+
+/* ============================================================
+   4K E ULTRA-WIDE — 2000px ou mais
+   Escala generosa para monitores grandes.
+   ============================================================ */
+@media (min-width: 2000px) {
+
+    .ship-hull {
+        width: 750px;
+        height: 260px;
+        top: -80px;
+    }
+
+    #anchor-svg {
+        top: -80px;
+        transform: translateX(-50%) scale(1.5);
+        transform-origin: top center;
+    }
+
+    #fishing-line-svg {
+        transform: scale(1.4);
+        transform-origin: top left;
+    }
+
+    h1 {
+        font-size: 8rem;
+        margin-bottom: 20px;
+        letter-spacing: 8px;
+    }
+
+    .subtitle {
+        font-size: 2.5rem;
+        margin-bottom: 60px;
+    }
+
+    .card {
+        max-width: 1500px;
+        padding: 120px;
+        border-width: 6px;
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .quote-text {
+        font-size: 2.5rem;
+        line-height: 1.6;
+        min-height: 250px;
+    }
+
+    .author {
+        font-size: 2rem;
+        margin-top: 40px;
+    }
+
+    .shell-button img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .button-text {
+        font-size: 3.5rem;
+        margin-top: 15px;
+    }
+
+    .button-container {
+        margin-top: 60px;
+    }
+
+    .copy-button {
+        width: 80px;
+        height: 80px;
+        top: 25px;
+    }
+
+    .copy-button svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .copy-tooltip {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+        top: 95px;
+    }
+}

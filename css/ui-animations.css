@@ -1,0 +1,125 @@
+@keyframes morphBorder {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    25%  { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+    50%  { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+    75%  { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(77, 208, 225, 0.1), transparent);
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes flowWave {
+    0% { background-position: 0% center; transform: translateY(0px); }
+    50% { background-position: 100% center; transform: translateY(-5px); }
+    100% { background-position: 0% center; transform: translateY(0px); }
+}
+
+@keyframes glow {
+    from { filter: drop-shadow(0 0 15px rgba(77, 208, 225, 0.5)); }
+    to   { filter: drop-shadow(0 0 30px rgba(77, 208, 225, 0.8)); }
+}
+
+.shell-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 5px 15px rgba(77, 208, 225, 0.4));
+    z-index: 1001 !important;
+}
+
+.shell-button:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 8px 25px rgba(77, 208, 225, 0.6));
+}
+
+.shell-button:active {
+    transform: scale(0.95);
+}
+
+.shell-button img {
+    width: 120px;
+    height: 120px;
+    display: block;
+    animation: shellFloat 3s ease-in-out infinite;
+}
+
+@keyframes shellFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.shell-button.glow {
+    animation: shellGlow 0.6s ease-out;
+}
+
+@keyframes shellGlow {
+    0%   { filter: drop-shadow(0 5px 15px rgba(77, 208, 225, 0.4)); }
+    50%  { filter: drop-shadow(0 0 40px rgba(77, 208, 225, 1))
+                  drop-shadow(0 0 60px rgba(255, 255, 255, 0.8))
+                  drop-shadow(0 0 80px rgba(77, 208, 225, 0.6));
+           transform: scale(1.2); }
+    100% { filter: drop-shadow(0 5px 15px rgba(77, 208, 225, 0.4)); }
+}
+
+/* ── SPLASH ────────────────────────────────────────────── */
+
+.splash-particle {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(77, 208, 225, 0.8) 0%, rgba(77, 208, 225, 0.4) 50%, transparent 100%);
+    animation: splash 0.8s ease-out forwards;
+}
+
+@keyframes splash {
+    0%   { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(360deg); opacity: 0; }
+}
+
+.splash-droplet {
+    position: absolute;
+    pointer-events: none;
+    width: 8px;
+    height: 12px;
+    background: linear-gradient(180deg, rgba(77, 208, 225, 0.9) 0%, rgba(180, 235, 242, 0.6) 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: dropletFall 0.6s ease-out forwards;
+}
+
+@keyframes dropletFall {
+    0%   { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(80px) scale(0.3); opacity: 0; }
+}
+
+.splash-wave {
+    position: absolute;
+    pointer-events: none;
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(77, 208, 225, 0.6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: center;
+    animation: waveExpand 0.6s ease-out forwards;
+}
+
+@keyframes waveExpand {
+    0%   { transform: translate(-50%, -50%) scale(1);    opacity: 1; }
+    100% { transform: translate(-50%, -170%) scale(3.3); opacity: 0; }
+}

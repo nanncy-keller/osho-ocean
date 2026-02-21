@@ -1,0 +1,63 @@
+ .ship-hull {
+    position: fixed;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    opacity: 0.3;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+}
+
+
+/* Estilo para o SVG da âncora separado */
+#anchor-svg {
+    position: fixed;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    pointer-events: none;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+}
+
+
+/* ===== ANIMAÇÃO DA ÂNCORA ===== */
+@keyframes anchorDrop {
+    0% {
+        transform: translate(380px, 145px) translateY(0);
+        opacity: 1;
+    }
+    30% {
+        transform: translate(380px, 145px) translateY(50px);
+        opacity: 1;
+    }
+    70% {
+        transform: translate(380px, 145px) translateY(50px);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(380px, 145px) translateY(0);
+        opacity: 1;
+    }
+}
+
+.anchor-dropping {
+    animation: anchorDrop 2.5s ease-in-out forwards !important;
+}
+
+.anchor-dropping .anchor-rope {
+    stroke: #8A8A8A;
+    stroke-width: 3.5;
+}
+
+#fishing-line-svg {
+    animation: fishingSwing 4s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@keyframes fishingSwing {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    75% { transform: rotate(-3deg); }
+}
