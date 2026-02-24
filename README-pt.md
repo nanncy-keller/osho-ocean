@@ -9,7 +9,7 @@
 
 # 🌊 Osho Ocean 🌊 
 
-<img src="images/screen.png" alt="Osho Ocean" width="700">
+<img src="images/screen.png" alt="Pré-visualização do Osho Ocean" width="80%">
 
 ### "A vida começa onde o medo termina." 
   
