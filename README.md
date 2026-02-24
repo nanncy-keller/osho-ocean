@@ -1,3 +1,10 @@
+<div align="center">
+
+[![English](https://img.shields.io/badge/Lang-English%20🇺🇸-red)](./README.md)
+[![Português](https://img.shields.io/badge/Lang-Português%20🇧🇷-blue)](./README-pt.md)
+
+</div>
+
 # 🌊 Osho Ocean - Mystical Quotes Generator
 <br>
 <br>
